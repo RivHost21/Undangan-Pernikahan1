@@ -8,6 +8,33 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+  #gallery {
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #f9f7f2, #ffffff);
+  text-align: center;
+}
+
+#gallery h2 {
+  margin-bottom: 20px;
+  color: #2f4f4f;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+}
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 body{
   font-family:'Poppins',sans-serif;
