@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Undangan Pernikahan</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(180deg,#f3efe9,#ffffff);
+  color:#333;
+}
+section{
+  min-height:100vh;
+  padding:60px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.container{
+  max-width:720px;
+  width:100%;
+  background:white;
+  padding:40px;
+  border-radius:18px;
+  box-shadow:0 20px 40px rgba(0,0,0,.1);
+  text-align:center;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s ease;
+}
+.container.show{opacity:1;transform:translateY(0)}
+h1,h2{font-family:'Amiri',serif}
+.hero{
+  background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+    url('bg.jpg') center/cover no-repeat;
+  color:white;
+}
+.hero .container{background:transparent;box-shadow:none}
+.names{font-size:34px;margin:20px 0}
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 30px;
+  background:#6b4f4f;
+  color:white;
+  border-radius:30px;
+  text-decoration:none;
+}
+.detail p{margin:10px 0}
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  margin-top:20px;
+}
+.countdown div{
+  background:#6b4f4f;
+  color:white;
+  padding:10px 15px;
+  border-radius:10px;
+}
+#musicBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  border:none;
+  background:#6b4f4f;
+  color:white;
+  padding:12px;
+  border-radius:50%;
+  font-size:18px;
+  cursor:pointer;
+  z-index:999;
+}
+footer{
+  padding:20px;
+  text-align:center;
+  font-size:13px;
+  color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO (ganti lagu.mp3 sesuai file lu) -->
+<audio id="musik" loop>
+  <source src="lagu.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()">🔇</button>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <p>UNDANGAN PERNIKAHAN</p>
+    <h1 class="names">Aditya Maharaja &amp; Maharani Azzahra</h1>
+    <p>Senin, 26 Januari 2026</p>
+    <a href="#pembuka" class="btn" onclick="playMusic()">Buka Undangan</a>
+  </div>
+</section>
+
+<!-- PEMBUKA -->
+<section id="pembuka">
+  <div class="container">
+    <h2>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</h2>
+    <p>Assalamu’alaikum Wr. Wb.</p>
+    <p>Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan pernikahan putra-putri kami.</p>
+  </div>
+</section>
+
+<!-- MEMPELAI -->
+<section>
+  <div class="container">
+    <h2>Mempelai</h2>
+    <p><b>Aditya Maharaja</b><br>Putra dari Bapak … &amp; Ibu …</p>
+    <p>&</p>
+    <p><b>Maharani Azzahra</b><br>Putri dari Bapak … &amp; Ibu …</p>
+  </div>
+</section>
+
+<!-- DETAIL -->
+<section id="detail">
+  <div class="container detail">
+    <h2>Akad &amp; Resepsi</h2>
+    <p>📅 Senin, 26 Januari 2026</p>
+    <p>⏰ 09.00 WIB – selesai</p>
+    <p>📍 Gedung Serbaguna</p>
+
+    <a class="btn" target="_blank" href="https://www.google.com/maps">Lihat Lokasi</a>
+
+    <div class="countdown" id="countdown"></div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section>
+  <div class="container">
+    <h2>Konfirmasi Kehadiran</h2>
+    <p>Mohon konfirmasi kehadiran melalui WhatsApp</p>
+    <a class="btn" target="_blank"
+      href="https://wa.me/628xxxxxxxxxx?text=Assalamu’alaikum,%20saya%20akan%20hadir%20pada%20acara%20pernikahan%20Aditya%20Maharaja%20dan%20Maharani%20Azzahra">
+      RSVP WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- PENUTUP -->
+<section>
+  <div class="container">
+    <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir.</p>
+    <p><b>Wassalamu’alaikum Wr. Wb.</b></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Undangan Pernikahan
+</footer>
+
+<script>
+/* animasi scroll */
+const cards=document.querySelectorAll('.container');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})
+},{threshold:.2});
+cards.forEach(c=>observer.observe(c));
+
+/* musik */
+const musik=document.getElementById("musik");
+const btn=document.getElementById("musicBtn");
+function playMusic(){ musik.play(); btn.innerHTML="🔊"; }
+function toggleMusic(){
+  if(musik.paused){ musik.play(); btn.innerHTML="🔊"; }
+  else{ musik.pause(); btn.innerHTML="🔇"; }
+}
+
+/* countdown: 26 Jan 2026 09:00 */
+const targetDate=new Date("2026-01-26T09:00:00").getTime();
+const cd=document.getElementById("countdown");
+setInterval(()=>{
+  const now=new Date().getTime();
+  const d=targetDate-now;
+  if(d<0) return;
+  const day=Math.floor(d/(1000*60*60*24));
+  const hr=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const min=Math.floor((d%(1000*60*60))/(1000*60));
+  cd.innerHTML=`
+    <div>${day}<br>Hari</div>
+    <div>${hr}<br>Jam</div>
+    <div>${min}<br>Menit</div>`;
+},1000);
+</script>
+
+</body>
+</html>
